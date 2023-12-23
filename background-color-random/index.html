@@ -4,11 +4,127 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Learn DOM Manipulation</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                transition: background-color .25s ease-in-out;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                background-color: #bdc1ca;
+                color: rgb(255, 255, 255);
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            }
+
+            .container {
+                min-width: 500px;
+                text-align: center;
+                background-color: rgb(30, 3, 91);
+            }
+
+            h1 {
+                font-size: 2rem;
+                margin-block: 1.5rem;
+            }
+
+            ul {
+                list-style-type: none;
+            }
+
+            li.movie-list {
+                background-color: #efedee;
+                padding-block: .5rem;
+                color: black;
+                border: 1px solid #282828;
+                display: flex;
+                gap: .5rem;
+                justify-content: center;
+                transition: background-color .25s ease-in-out;
+            }
+        </style>
     </head>
 
     <body>
-        <h1>Hello World</h1>
+        <div class="container">
+            <h1 class="heading">My Favorite Movies in 2023</h1>
+            <ul>
+                <li class="movie-list">Killer of the Flower Moons</li>
+                <li class="movie-list">Godzilla Minus One</li>
+                <li class="movie-list">Barbie</li>
+                <li class="movie-list">Oppenheimer</li>
+                <li class="movie-list">Spiderman Across the Spider-verse</li>
+            </ul>
+        </div>
+
+        <script>
+            const heading = document.querySelector(".heading")
+            const ul = document.querySelector("ul")
+
+            const movieCollection = ["CODA", "Blue Eye Samurai", "One Piece Netflix"]
+            for (const movie of movieCollection) {
+                const li = document.createElement("li")
+                li.classList.add("movie-list")
+                li.textContent = movie
+                ul.append(li)
+            }
+
+            function createDelButton() {
+                const button = document.createElement('button')
+                button.textContent = 'Delete'
+                button.addEventListener('click', (e) => {
+                    e.target.parentNode.remove()
+                })
+                return button
+            }
+
+            const movieLists = document.querySelectorAll(".movie-list")
+
+            /* 
+            // Adding class movie-num based on the node index number
+            for (let i = 0; i < movieLists.length; i++) {
+                movieLists[i].classList.add(`movie${i + 1}`)
+            }
+            */
+
+            const randomNum = () => Math.floor(Math.random() * 256)
+
+            function generateColor() {
+                let color = `${randomNum()}, ${randomNum()}, ${randomNum()}`
+                return color
+            }
+
+            /*
+            // Adding mouseover event listener to each list item
+            // Change to random background-color when hover
+            for (const movie of movieLists) {
+                movie.addEventListener("mouseover", () => {
+                    // let color = ['#edefee', '#ee33aa', '#332121', "#44fede"]
+                    // let randomIndex = Math.floor(Math.random() * color.length)
+                    const body = document.querySelector('body')
+                    body.style.backgroundColor = `rgb(${generateColor()})`
+                })
+            }
+            */
+
+            // Changing both body and movie background-color to random color
+            // Using setInterval method with 500ms timeout
+            setInterval(() => {
+                for (const movie of movieLists) {
+                    movie.style.backgroundColor = `rgb(${generateColor()})`
+                }
+                document.querySelector('body').style.backgroundColor = `rgb(${generateColor()})`
+            }, 500)
+
+
+
+        </script>
     </body>
 
 </html>
