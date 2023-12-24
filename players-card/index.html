@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>My Team</title>
+    </head>
+
+    <body>
+        <h1>Team Stats</h1>
+        <main>
+            <div class="team-stats">
+                <p>Team: <span id="team"></span></p>
+                <p>Sport: <span id="sport"></span></p>
+                <p>Year: <span id="year"></span></p>
+                <p>Head Coach: <span id="head-coach"></span></p>
+            </div>
+            <label class="option-label" for="players">Filter Teammats:</label>
+            <select name="players" id="players">
+                <option value="all">All Players</option>
+                <option value="nickname">Nicknames</option>
+                <option value="forward">Position Forward</option>
+                <option value="midfielder">Position MidFielder</option>
+                <option value="defender">Position Defender</option>
+                <option value="goalkeeper">Position Goalkeeper</option>
+            </select>
+            <div class="cards" id="player-cards">
+
+            </div>
+        </main>
+
+        <script src="main.js"></script>
+    </body>
+
+</html>
