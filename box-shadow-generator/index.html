@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Box Shadow Generator</title>
+        <style>
+            body {
+                background: linear-gradient(90deg, rgb(20, 18, 18), rgb(59, 49, 49));
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            }
+
+            main {
+                width: 400px;
+                background-color: white;
+                padding: 4rem 2.5rem;
+                border-radius: 16px;
+            }
+
+            .color-select {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .box-container {
+                padding: 4rem;
+            }
+
+            .box-container .box {
+                width: 150px;
+                height: 150px;
+                background-color: black;
+                margin-inline: auto;
+            }
+
+            .box-shadow-slider {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            label {
+                display: block;
+                text-align: center;
+            }
+
+            .input-control {
+                display: flex;
+                flex-direction: column;
+            }
+
+            p#box-shadow-color {
+                text-align: center;
+                padding: 8px;
+                background-color: #d6d6d5;
+                border-radius: 16px;
+                margin-bottom: 2rem;
+            }
+        </style>
+    </head>
+
+    <body>
+        <main>
+            <div>
+                <p id="box-shadow-color"></p>
+            </div>
+            <div class="color-select">
+                <input type="color" name="foreground-color" id="foreground-color" value="#1a1a1a">
+                <input type="color" name="shadow-color" id="shadow-color" value="#3d3d3d">
+            </div>
+            <div class="box-container">
+                <div class="box" id="box"></div>
+            </div>
+            <div class="box-shadow-slider">
+                <div class="input-control">
+                    <label for="h-offset">H-Offset</label>
+                    <input type="range" id="h-offset" min="1" max="100" step="1" value="8">
+                </div>
+                <div class="input-control">
+                    <label for="v-offset">V-Offset</label>
+                    <input type="range" id="v-offset" min="1" max="100" step="1" value="8">
+                </div>
+                <div class="input-control">
+                    <label for="blur">Blur</label>
+                    <input type="range" id="blur" min="1" max="100" step="1" value="10">
+                </div>
+                <div class="input-control">
+                    <label for="spread">Spread</label>
+                    <input type="range" id="spread" min="1" max="100" step="1" value="2">
+                </div>
+            </div>
+        </main>
+
+        <script>
+            const foregroundColor = document.getElementById("foreground-color")
+            const shadowColor = document.getElementById("shadow-color")
+            const boxDemo = document.getElementById("box")
+            const boxShadowColor = document.getElementById("box-shadow-color")
+
+
+            const hOffsetSlider = document.getElementById("h-offset")
+            const vOffsetSlider = document.getElementById("v-offset")
+            const blurSlider = document.getElementById("blur")
+            const spreadSlider = document.getElementById("spread")
+
+            const selectColor = document.querySelectorAll(".color-select input")
+            const sliders = document.querySelectorAll(".box-shadow-slider input[type=range]")
+
+            selectColor.forEach((input) => {
+                input.addEventListener("input", () => {
+                    updateBox()
+                    boxShadowColor.textContent = boxDemo.style.boxShadow
+                })
+            })
+
+            sliders.forEach((input) => {
+                input.addEventListener("input", () => {
+                    updateBox()
+                    boxShadowColor.textContent = boxDemo.style.boxShadow
+                })
+            })
+
+            window.addEventListener("DOMContentLoaded", () => {
+                updateBox()
+                boxShadowColor.textContent = boxDemo.style.boxShadow
+            })
+
+            function updateBox() {
+                boxDemo.style.backgroundColor = foregroundColor.value
+                boxDemo.style.boxShadow = `${hOffsetSlider.value}px ${vOffsetSlider.value}px ${blurSlider.value}px ${spreadSlider.value}px ${shadowColor.value}`
+            }
+
+
+
+
+        </script>
+    </body>
+
+</html>
